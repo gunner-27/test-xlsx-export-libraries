@@ -1,0 +1,19 @@
+{
+  "name": "test-xlsx-export-libraries",
+  "version": "1.0.0",
+  "description": "test few libs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gunner-27/test-xlsx-export-libraries.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gunner-27/test-xlsx-export-libraries/issues"
+  },
+  "homepage": "https://github.com/gunner-27/test-xlsx-export-libraries#readme"
+}
