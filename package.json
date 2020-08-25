@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/gunner-27/test-xlsx-export-libraries/issues"
   },
-  "homepage": "https://github.com/gunner-27/test-xlsx-export-libraries#readme"
+  "homepage": "https://github.com/gunner-27/test-xlsx-export-libraries#readme",
+  "dependencies": {
+    "excel4node": "^1.7.2",
+    "exceljs": "^4.1.1",
+    "xlsx-populate": "^1.21.0"
+  }
 }
