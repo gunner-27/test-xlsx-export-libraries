@@ -1,7 +1,7 @@
 const XlsxPopulate = require("xlsx-populate");
 
 // Load a new blank workbook
-XlsxPopulate.fromBlankAsync().then((workbook) => {
+const create = XlsxPopulate.fromBlankAsync().then((workbook) => {
   // Modify the workbook.
   workbook.sheet("Sheet1").cell("A1").value("This is neat!");
 
@@ -10,3 +10,5 @@ XlsxPopulate.fromBlankAsync().then((workbook) => {
     `./samples/XlsxPopulate-example-${new Date().toISOString()}.xlsx`
   );
 });
+
+module.exports = create;

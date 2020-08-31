@@ -28,11 +28,10 @@ const rows = [
 worksheet.addRows(rows);
 
 // save workbook to disk
-workbook.xlsx
+const create = workbook.xlsx
   .writeFile(`./samples/ExcelJs-example-${new Date().toISOString()}.xlsx`)
-  .then(() => {
-    console.log("saved");
-  })
   .catch((err) => {
     console.log("err", err);
   });
+
+module.exports = create;

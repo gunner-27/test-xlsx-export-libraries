@@ -35,4 +35,8 @@ ws.cell(3, 1)
   .style(style)
   .style({ font: { size: 14 } });
 
-wb.write(`./samples/Excel4node-example-${new Date().toISOString()}.xlsx`);
+const create = wb.write(
+  `./samples/Excel4node-example-${new Date().toISOString()}.xlsx`
+);
+
+module.exports = create;
