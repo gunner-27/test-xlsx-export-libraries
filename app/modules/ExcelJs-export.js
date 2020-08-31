@@ -53,9 +53,6 @@ sheet2.addRows(rows);
 // save workbook to disk
 const create = workbook.xlsx
   .writeFile(`./samples/ExcelJs-example-${new Date().toISOString()}.xlsx`)
-  .then(() => {
-    console.log("created");
-  })
   .catch((err) => {
     console.log("err", err);
   });

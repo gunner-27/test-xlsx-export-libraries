@@ -4,7 +4,7 @@
   "description": "test few libs",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "rm -rf ./samples/* && node app/app.js"
   },
   "repository": {
     "type": "git",
