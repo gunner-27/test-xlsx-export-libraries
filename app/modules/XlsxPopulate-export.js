@@ -1,5 +1,7 @@
 const XlsxPopulate = require("xlsx-populate");
 
+const data = require("../data/mock-data");
+
 // Load a new blank workbook
 const create = XlsxPopulate.fromBlankAsync().then((workbook) => {
   // Modify the workbook.

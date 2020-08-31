@@ -1,6 +1,8 @@
 // Require library
 var xl = require("excel4node");
 
+const data = require("../data/mock-data");
+
 // Create a new instance of a Workbook class
 var wb = new xl.Workbook();
 

@@ -1,35 +1,61 @@
 const Excel = require("exceljs");
 
+const data = require("../data/mock-data");
+
 // Create workbook & add worksheet
 const workbook = new Excel.Workbook();
-const worksheet = workbook.addWorksheet("ExampleSheet");
+const sheet1 = workbook.addWorksheet(data.sheet1.name);
+const sheet2 = workbook.addWorksheet(data.sheet2.name);
 
+sheet1.columns = data.sheet1.headers;
+
+let columnsNames = [];
+
+data.sheet1.headers.forEach((h) => {
+  columnsNames.push({ header: h, key: h });
+});
 // add column headers
-worksheet.columns = [
-  { header: "Package", key: "package_name" },
-  { header: "Author", key: "author_name" },
-];
+sheet1.columns = columnsNames;
 
-// Add row using key mapping to columns
-worksheet.addRow(
-  { package_name: "ABC", author_name: "Author 1" },
-  { package_name: "XYZ", author_name: "Author 2" }
-);
+columnsNames = [];
 
-// Add rows as Array values
-worksheet.addRow(["BCD", "Author Name 3"]);
+data.sheet2.headers.forEach((h) => {
+  columnsNames.push({ header: h, key: h });
+});
+// add column headers
+sheet2.columns = columnsNames;
 
-// Add rows using both the above of rows
-const rows = [
-  ["FGH", "Author Name 4"],
-  { package_name: "PQR", author_name: "Author 5" },
-];
+let rows = [];
+data.sheet1.data.forEach((obj) => {
+  let prepArr = [];
+  prepArr.push(
+    obj.FIO,
+    obj.date,
+    obj.num,
+    obj.text,
+    obj.status,
+    obj.colored_num
+  );
+  rows.push(prepArr);
+});
 
-worksheet.addRows(rows);
+sheet1.addRows(rows);
+
+rows = [];
+data.sheet2.data.forEach((obj) => {
+  let prepArr = [];
+  prepArr.push(obj.FIO, obj.status, obj.date, obj.text, obj.sex);
+  rows.push(prepArr);
+});
+
+sheet2.addRows(rows);
 
 // save workbook to disk
 const create = workbook.xlsx
   .writeFile(`./samples/ExcelJs-example-${new Date().toISOString()}.xlsx`)
+  .then(() => {
+    console.log("created");
+  })
   .catch((err) => {
     console.log("err", err);
   });
