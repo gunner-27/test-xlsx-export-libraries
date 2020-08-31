@@ -4,7 +4,7 @@
   "description": "test few libs",
   "main": "app.js",
   "scripts": {
-    "start": "rm -rf ./samples/* && node app/app.js"
+    "start": "mkdir -p samples && rm -rf ./samples/* && node app/app.js"
   },
   "repository": {
     "type": "git",
