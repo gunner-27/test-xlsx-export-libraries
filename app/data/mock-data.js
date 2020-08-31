@@ -1,6 +1,50 @@
 const sheet1 = {
   name: "Красивый лист",
-  headers: ["ФИО", "ДАТА", "ЧИСЛО", "ТЕКСТ", "СТАТУС", "ЦВЕТНОЕ ЧИСЛО"],
+  headers: [
+    {
+      key: "fio",
+      text: "ФИО",
+      width: 30,
+    },
+    {
+      key: "date",
+      text: "ДАТА",
+      width: 10,
+    },
+    {
+      key: "num",
+      text: "ЧИСЛО",
+      width: 10,
+    },
+    {
+      key: "text",
+      text: "ТЕКСТ",
+      width: 50,
+    },
+    {
+      key: "status",
+      text: "СТАТУС",
+      width: 12,
+    },
+    {
+      key: "colored_num",
+      text: "ЦВЕТНОЕ ЧИСЛО",
+      width: 24,
+    },
+  ],
+  styles: {
+    headers: {
+      font: {
+        name: "Calibri",
+        size: 18,
+        bold: true,
+      },
+      alignment: {
+        vertical: "middle",
+        horizontal: "center",
+      },
+    },
+  },
   data: [
     {
       FIO: "Тестовый Агент Иванович",
@@ -31,7 +75,53 @@ const sheet1 = {
 
 const sheet2 = {
   name: "Другой лист",
-  headers: ["Имя Герой Фамилия", "Статус", "ДАТА", "Описание", "Пол"],
+  headers: [
+    {
+      key: "fio",
+      text: "Имя Герой Фамилия",
+      width: 30,
+    },
+    {
+      key: "status",
+      text: "СТАТУС",
+      width: 12,
+    },
+    {
+      key: "date",
+      text: "ДАТА",
+      width: 10,
+    },
+    {
+      key: "text",
+      text: "ОПИСАНИЕ",
+      width: 50,
+    },
+    {
+      key: "sex",
+      text: "ПОЛ",
+      width: 7,
+    },
+  ],
+  styles: {
+    headers: {
+      font: {
+        name: "Calibri",
+        size: 18,
+        bold: true,
+      },
+      headersColors: [
+        "FFFF0000",
+        "FFec6333",
+        "fffdf731",
+        "ff7ff21a",
+        "ff58ccfb",
+      ],
+      alignment: {
+        vertical: "middle",
+        horizontal: "center",
+      },
+    },
+  },
   data: [
     {
       FIO: "Тони ЖелезныйЧеловек Старк",
