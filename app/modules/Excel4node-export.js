@@ -7,35 +7,48 @@ const data = require("../data/mock-data");
 var wb = new xl.Workbook();
 
 // Add Worksheets to the workbook
-var ws = wb.addWorksheet("Sheet 1");
-var ws2 = wb.addWorksheet("Sheet 2");
+var sheet1 = wb.addWorksheet(data.sheet1.name);
+var sheet2 = wb.addWorksheet(data.sheet2.name);
 
-// Create a reusable style
-var style = wb.createStyle({
-  font: {
-    color: "#FF0800",
-    size: 12,
-  },
-  numberFormat: "$#,##0.00; ($#,##0.00); -",
-});
+const sheets = [sheet1, sheet2];
 
-// Set value of cell A1 to 100 as a number type styled with paramaters of style
-ws.cell(1, 1).number(100).style(style);
+const setHeaders = (sheets, headers) => {
+  sheets.forEach((s, i) => {
+    headers[i].forEach((h, i) => {
+      s.column(i + 1).setWidth(h.width);
+      s.cell(1, i + 1).string(h.text);
+    });
+  });
+};
 
-// Set value of cell B1 to 200 as a number type styled with paramaters of style
-ws.cell(1, 2).number(200).style(style);
+setHeaders(sheets, [data.sheet1.headers, data.sheet2.headers]);
 
-// Set value of cell C1 to a formula styled with paramaters of style
-ws.cell(1, 3).formula("A1 + B1").style(style);
+const parseData = (sheets, data) => {
+  sheets.forEach((sheet, i) => {
+    data[i].forEach((obj, i) => {
+      Object.values(obj).forEach((val, j) => {
+        switch (typeof val) {
+          case "number":
+            sheet
+              .cell(i + 2, j + 1, i + 2, Object.values(obj).length)
+              .number(val);
+            break;
+          default:
+            sheet
+              .cell(i + 2, j + 1, i + 2, Object.values(obj).length)
+              .string(val.toString());
+        }
+      });
+    });
+  });
+};
 
-// Set value of cell A2 to 'string' styled with paramaters of style
-ws.cell(2, 1).string("string").style(style);
+parseData(sheets, [data.sheet1.data, data.sheet2.data]);
 
-// Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-ws.cell(3, 1)
-  .bool(true)
-  .style(style)
-  .style({ font: { size: 14 } });
+findValue(sheets, [
+  { columnNum: 5, value: "Архивирован" },
+  { columnNum: 2, value: "Мертв" },
+]);
 
 const create = wb.write(
   `./samples/Excel4node-example-${new Date().toISOString()}.xlsx`
