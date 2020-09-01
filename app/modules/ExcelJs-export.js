@@ -6,6 +6,7 @@ const data = require("../data/mock-data");
 const workbook = new Excel.Workbook();
 const sheet1 = workbook.addWorksheet(data.sheet1.name);
 const sheet2 = workbook.addWorksheet(data.sheet2.name);
+const sheets = [sheet1, sheet2];
 
 // Add column headers
 const prepareHeaders = function (data) {
@@ -56,17 +57,26 @@ sheet1.getColumn("colored_num").font = {
   color: { argb: "ffe55ffe" },
 };
 
-sheet1.eachRow(function (row) {
-  if (row.getCell("status") == "Архивирован") {
-    row.eachCell(function (cell) {
-      cell.fill = {
-        type: "pattern",
-        pattern: "solid",
-        fgColor: { argb: "FFFF0000" },
-      };
+const findAndStyleRows = (sheets, valuesInfos) => {
+  sheets.forEach((sheet, i) => {
+    sheet.eachRow((row) => {
+      if (row.getCell(valuesInfos[i].column) == valuesInfos[i].value) {
+        row.eachCell((cell) => {
+          cell.fill = {
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "FFFF0000" },
+          };
+        });
+      }
     });
-  }
-});
+  });
+};
+
+findAndStyleRows(sheets, [
+  { column: "status", value: "Архивирован" },
+  { column: "status", value: "Мертв" },
+]);
 
 sheet2.getRow(1).eachCell((cell, i) => {
   cell.fill = {
@@ -76,26 +86,14 @@ sheet2.getRow(1).eachCell((cell, i) => {
   };
 });
 
-sheet2.eachRow(function (row) {
-  if (row.getCell("status") == "Мертв") {
-    row.eachCell(function (cell) {
-      cell.style = {
-        font: {
-          color: { argb: "FFFF0000" },
-        },
-      };
-    });
-  }
-});
-
-const stylingHeaders = function (...sheets) {
+const stylingHeaders = function (sheets) {
   sheets.forEach((sheet, i) => {
     sheet.getRow(1).font = data[`sheet${i + 1}`].styles.headers.font;
     sheet.getRow(1).alignment = data[`sheet${i + 1}`].styles.headers.alignment;
   });
 };
 
-stylingHeaders(sheet1, sheet2);
+stylingHeaders(sheets);
 
 // Add auto filter
 sheet2.autoFilter = "A1:E1";
